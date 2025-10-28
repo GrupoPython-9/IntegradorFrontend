@@ -1,4 +1,4 @@
-import { fetchPost } from "../../../utils/api";
+import { registrarUsuario } from "../../../utils/api";
 
 const nombre = document.getElementById("nombre") as HTMLInputElement;
 const apellido = document.getElementById("apellido") as HTMLInputElement;
@@ -14,20 +14,20 @@ form?.addEventListener("submit", async (e) => {
   const data = {
     nombre: nombre.value.trim(),
     apellido: apellido.value.trim(),
-    email: email.value.trim(),
+    mail: email.value.trim(),
     celular: celular.value.trim(),
     contrasenia: contrasenia.value.trim(),
   };
 
   // Validación
-  if (!data.nombre || !data.apellido || !data.email || !data.celular || !data.contrasenia) {
+  if (!data.nombre || !data.apellido || !data.mail || !data.celular || !data.contrasenia) {
     alert("Por favor, completa todos los campos.");
     return;
   }
 
   try {
     // Enviar datos al backend
-    const response = await fetchPost(data);
+    const response = await registrarUsuario(data);
     console.log("Usuario registrado correctamente:", response);
 
     // Redirigir al login si todo salió bien

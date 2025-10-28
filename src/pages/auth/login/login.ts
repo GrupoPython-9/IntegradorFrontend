@@ -1,4 +1,4 @@
-import { fetchPostLogin } from "../../../utils/api";
+import { loginUsuario } from "../../../utils/api";
 
 // Seleccionamos los campos correctos según el HTML
 const email = document.getElementById("email") as HTMLInputElement;
@@ -23,7 +23,7 @@ form?.addEventListener("submit", async (e) => {
 
     try {
         // Llamada al backend
-        const response = await fetchPostLogin(data);
+        const response = await loginUsuario(data);
         console.log("Inicio de sesión correcto:", response);
 
         // Redirigir al home si todo está bien
