@@ -25,7 +25,8 @@ form?.addEventListener("submit", async (e) => {
         // Llamada al backend
         const response = await loginUsuario(data);
         console.log("Inicio de sesión correcto:", response);
-
+        //Agregar luego verificacion por rol
+        
         // Redirigir al home si todo está bien
         window.location.href = "../../client/home/home.html";
     } catch (error) {
