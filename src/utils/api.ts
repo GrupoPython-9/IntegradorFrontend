@@ -1,16 +1,18 @@
-const fetchUrl: string = "http://localhost:8080/usuario"
+const direccionUrl: string = "http://localhost:8080/usuario"
 
 /* Metodo Get */
-export const fetchGet = fetch(fetchUrl,{
+export const fetchGet = fetch(direccionUrl,{
     method:"GET",
 })
     .then((res)=> res.json())
-    .then((data) => console.log(data))
+    //.then((data) => console.log(data))
 
 
 /* Metodo Post */
-export const fetchPost = async (data: any) => {
-  const response = await fetch(fetchUrl, {
+export const registrarUsuario = async (data: any) => {
+  
+
+  const response = await fetch(direccionUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,7 +33,7 @@ export const fetchPost = async (data: any) => {
 
 const urlLogin: string = "http://localhost:8080/auth/login"
 
-export const fetchPostLogin = async(data:any)=>{
+export const loginUsuario = async(data:any)=>{
   const response = await fetch(urlLogin, {
     method: "POST",
     headers: {
