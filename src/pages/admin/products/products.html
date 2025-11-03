@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../style.css" />
+    <title>Food Store</title>
+  </head>
+
+  <body class="body__main">
+    <header>
+      <nav class="contenedor__nav">
+        <h2 class="nav__title">🍕Food Store</h2>
+        <ul class="nav__list">
+          <li><a class="nav__links" href="Tienda">Tienda</a></li>
+          <li><a class="nav__links" href="PanelAdmin">Panel Admin</a></li>
+          <li><a class="nav__links" href="Usuario">Usuario</a></li>
+          <li><button class="btn-cancel">Cerrar Sesión</button></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main-container">
+      <aside class="sidebar">
+        <h3 class="nav__title">Administración</h3>
+        <p>Panel de control</p>
+        <ul class="nav__list nav__list--sidebar">
+          <li><a class="nav__links" href="../adminHome/adminHome.html">📊 Dashboard</a></li>
+          <li><a class="nav__links" href="../categories/categories.html">📂 Categorías</a></li>
+          <li><a class="nav__links active" href="../products/products.html">🍔 Productos</a></li>
+          <li><a class="nav__links" href="#">📦 Pedidos</a></li>
+        </ul>
+        <hr />
+        <ul class="nav__list nav__list--sidebar">
+          <li><a href="#">🏪 Ver Tienda</a></li>
+        </ul>
+      </aside>
+
+      <section class="principal-section">
+       <div class="section-header">
+         <h1>Gestión de Productos</h1>
+         <button class="btn-update" id="btnNuevaCategoria">+ Nuevo Producto</button>
+       </div>
+
+        <table class="Tables" id="tablaCategorias">
+          <thead class="TableHead">
+            <tr>
+              <th>ID</th>
+              <th>Imagen</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Categoría</th>
+              <th>Stock</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="categoriasBody"></tbody>
+        </table>
+
+        <div id="modalCategoria" class="modal" style="display: none;">
+          <div class="modal-content">
+            <h2>Nueva Categoría</h2>
+            <form id="formCategoria">
+              <label for="nombre">Nombre:</label>
+              <input type="text" id="nombre" name="nombre" required />
+
+              <label for="descripcion">Descripción:</label>
+              <input type="text" id="descripcion" name="descripcion" required />
+
+              <label for="precio">Precio:</label>
+              <input type="number" id="precio" name="precio" required />
+
+              <label for="Stock">Stock</label>
+              <input type="number" id="stock" name="stock" required />
+
+              <label for="categoria">Categoría:</label>
+              <form>
+                <label for="categoria">Categoría</label>
+                <select id="categoria" name="categoria" required>
+                  
+                </select>
+
+              <label for="imagen">URL de Imagen:</label>
+              <input type="url" id="imagen" name="imagen" required />
+
+              <button type="submit">Guardar</button>
+              <button type="button" id="cerrarModal">Cancelar</button>
+            </form>
+          </div>
+        </div>
+
+        <script type="module" src="./categories.ts"></script>
+      </section>
+    </main>
+  </body>
+</html>

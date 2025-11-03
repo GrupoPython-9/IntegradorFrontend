@@ -1,6 +1,7 @@
-import { getCategorias } from '../../../utils/api';
+import { getCategorias, crearCategoria } from '../../../utils/api';
 import type { ICategoria } from '../../../types/ICategoria';
 
+// Cargar categorías
 async function cargarCategorias() {
   try {
     const categorias: ICategoria[] = await getCategorias();
@@ -14,6 +15,7 @@ async function cargarCategorias() {
       const fila = document.createElement('tr');
 
       fila.innerHTML = `
+        <td>${cat.id}</td>
         <td><img src="${cat.imagen}" alt="${cat.nombre}" width="50" /></td>
         <td>${cat.nombre}</td>
         <td>${cat.descripcion}</td>
@@ -30,48 +32,77 @@ async function cargarCategorias() {
   }
 }
 
+// Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
+  // Cargar categorías
   cargarCategorias();
-});
 
-import { crearCategoria } from '../../../utils/api';
+  // Obtener elementos del DOM
+  const modal = document.getElementById('modalCategoria') as HTMLDivElement;
+  const form = document.getElementById('formCategoria') as HTMLFormElement;
+  const cerrarModal = document.getElementById('cerrarModal') as HTMLButtonElement;
+  const btnNuevaCategoria = document.getElementById('btnNuevaCategoria') as HTMLButtonElement;
 
-const modal = document.getElementById('modalCategoria') as HTMLDivElement;
-const form = document.getElementById('formCategoria') as HTMLFormElement;
-const cerrarModal = document.getElementById('cerrarModal');
-const btnNuevaCategoria = document.getElementById('btnNuevaCategoria');
+  // Debug - verificar que los elementos existan
+  console.log('Modal:', modal);
+  console.log('Botón:', btnNuevaCategoria);
+  console.log('Form:', form);
+  console.log('Cerrar:', cerrarModal);
 
-// Mostrar el modal
-btnNuevaCategoria?.addEventListener('click', () => {
-  modal.style.display = 'block';
-});
-
-// Cerrar el modal
-cerrarModal?.addEventListener('click', () => {
-  modal.style.display = 'none';
-  form.reset();
-});
-
-// Enviar el formulario
-form?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const nombre = (document.getElementById('nombre') as HTMLInputElement).value.trim();
-  const descripcion = (document.getElementById('descripcion') as HTMLInputElement).value.trim();
-  const imagen = (document.getElementById('imagen') as HTMLInputElement).value.trim();
-
-  if (!nombre || !descripcion || !imagen) {
-    alert('Todos los campos son obligatorios');
-    return;
+  // Abrir modal
+  if (btnNuevaCategoria) {
+    btnNuevaCategoria.addEventListener('click', () => {
+      console.log('¡Click en botón Nueva Categoría!');
+      if (modal) {
+        modal.style.display = 'block';
+        console.log('Modal display:', modal.style.display);
+      }
+    });
   }
 
-  try {
-    await crearCategoria({ nombre, descripcion, imagen });
-    modal.style.display = 'none';
-    form.reset();
-    cargarCategorias(); // Recarga la tabla con la nueva categoría
-  } catch (error) {
-    console.error('Error al crear categoría:', error);
-    alert('No se pudo crear la categoría');
+  // Cerrar modal
+  if (cerrarModal) {
+    cerrarModal.addEventListener('click', () => {
+      console.log('Cerrando modal');
+      if (modal) {
+        modal.style.display = 'none';
+        form.reset();
+      }
+    });
+  }
+
+  // Cerrar modal al hacer click fuera de él
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      form.reset();
+    }
+  });
+
+  // Enviar formulario
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const nombre = (document.getElementById('nombre') as HTMLInputElement).value.trim();
+      const descripcion = (document.getElementById('descripcion') as HTMLInputElement).value.trim();
+      const imagen = (document.getElementById('imagen') as HTMLInputElement).value.trim();
+
+      if (!nombre || !descripcion || !imagen) {
+        alert('Todos los campos son obligatorios');
+        return;
+      }
+
+      try {
+        await crearCategoria({ nombre, descripcion, imagen });
+        alert('Categoría creada exitosamente');
+        modal.style.display = 'none';
+        form.reset();
+        cargarCategorias(); // Recargar la tabla
+      } catch (error) {
+        console.error('Error al crear categoría:', error);
+        alert('No se pudo crear la categoría');
+      }
+    });
   }
 });
