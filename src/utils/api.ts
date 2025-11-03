@@ -50,3 +50,25 @@ export const loginUsuario = async(data:any)=>{
   console.log(result);
   return result;
 }
+
+/* Método GET para obtener todas las categorías */
+export async function getCategorias() {
+  const res = await fetch('http://localhost:8080/api/categorias');
+  if (!res.ok) throw new Error('Error al obtener categorías');
+  return res.json();
+}
+
+/* Método POST para crear una nueva categoría */
+export async function crearCategoria(categoria: {
+  nombre: string;
+  descripcion: string;
+  imagen: string;
+}) {
+  const res = await fetch('http://localhost:8080/api/categorias', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(categoria),
+  });
+  if (!res.ok) throw new Error('Error al crear categoría');
+  return res.json();
+}

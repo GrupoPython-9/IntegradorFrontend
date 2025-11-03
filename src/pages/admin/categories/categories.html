@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestión de Categorías</title>
+  <link rel="stylesheet" href="../../../style.css" />
+</head>
+
+<body>
+  <h1>Gestión de Categorías</h1>
+  <button id="btnNuevaCategoria">+ Nueva Categoría</button>
+
+  <table id="tablaCategorias">
+    <thead>
+      <tr>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="categoriasBody">
+    </tbody>
+  </table>
+
+  <div id="modalCategoria" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2>Nueva Categoría</h2>
+      <form id="formCategoria">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" required />
+
+        <label for="imagen">URL de Imagen:</label>
+        <input type="url" id="imagen" name="imagen" required />
+
+        <button type="submit">Guardar</button>
+        <button type="button" id="cerrarModal">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="./categories.ts"></script>
+</body>
+
+</html>
