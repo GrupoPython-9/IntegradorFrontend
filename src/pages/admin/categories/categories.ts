@@ -1,5 +1,9 @@
-import { getCategorias, crearCategoria } from '../../../utils/api';
+import { eliminarCategoria, editarCategoria, getCategorias, crearCategoria } from '../../../utils/api';
+
 import type { ICategoria } from '../../../types/ICategoria';
+
+// 👉 Agrego esta variable global (sirve para saber si estamos editando)
+let categoriaEnEdicion: ICategoria | null = null;
 
 // Cargar categorías
 async function cargarCategorias() {
@@ -27,6 +31,51 @@ async function cargarCategorias() {
 
       tbody.appendChild(fila);
     });
+
+      // 🧹 Limpiar event listeners previos
+      const nuevoTbody = tbody.cloneNode(true) as HTMLElement;
+      tbody.parentNode?.replaceChild(nuevoTbody, tbody);
+
+      // Y luego usamos `nuevoTbody` para agregar el listener
+      nuevoTbody.addEventListener('click', async (e) => {
+      const target = e.target as HTMLElement;
+
+      // === Eliminar ===
+      if (target.classList.contains('eliminar')) {
+        const id = target.getAttribute('data-id');
+        if (!id) return;
+
+        if (!confirm('¿Seguro que deseas eliminar esta categoría?')) return;
+
+        try {
+          const response = await eliminarCategoria(Number(id));
+          alert(response.mensaje || 'Categoría eliminada correctamente');
+          cargarCategorias();
+        } catch (error) {
+          console.error('Error al eliminar categoría:', error);
+          alert('No se pudo eliminar la categoría');
+        }
+      }
+
+      // === Editar ===
+      if (target.classList.contains('editar')) {
+        const id = target.getAttribute('data-id');
+        if (!id) return;
+
+        const categoria = categorias.find((cat) => cat.id === Number(id));
+        if (!categoria) return;
+
+        categoriaEnEdicion = categoria; // Guardamos la categoría a editar
+
+        const modal = document.getElementById('modalCategoria') as HTMLDivElement;
+        (document.getElementById('nombreCategoria') as HTMLInputElement).value = categoria.nombre;
+        (document.getElementById('descripcionCategoria') as HTMLInputElement).value = categoria.descripcion;
+        (document.getElementById('imagen') as HTMLInputElement).value = categoria.imagen;
+
+        modal.style.display = 'block';
+      }
+    });
+
   } catch (error) {
     console.error('Error al cargar categorías:', error);
   }
@@ -67,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (modal) {
         modal.style.display = 'none';
         form.reset();
+        categoriaEnEdicion = null; // limpiar estado
       }
     });
   }
@@ -76,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === modal) {
       modal.style.display = 'none';
       form.reset();
+      categoriaEnEdicion = null; // limpiar estado
     }
   });
 
@@ -84,8 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const nombre = (document.getElementById('nombre') as HTMLInputElement).value.trim();
-      const descripcion = (document.getElementById('descripcion') as HTMLInputElement).value.trim();
+      const nombre = (document.getElementById('nombreCategoria') as HTMLInputElement).value.trim();
+      const descripcion = (document.getElementById('descripcionCategoria') as HTMLInputElement).value.trim();
       const imagen = (document.getElementById('imagen') as HTMLInputElement).value.trim();
 
       if (!nombre || !descripcion || !imagen) {
@@ -94,15 +145,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try {
-        await crearCategoria({ nombre, descripcion, imagen });
-        alert('Categoría creada exitosamente');
-        modal.style.display = 'none';
-        form.reset();
-        cargarCategorias(); // Recargar la tabla
-      } catch (error) {
-        console.error('Error al crear categoría:', error);
-        alert('No se pudo crear la categoría');
-      }
+  if (categoriaEnEdicion) {
+    // 🟢 Si estamos editando
+    await editarCategoria(categoriaEnEdicion.id, { nombre, descripcion, imagen });
+    alert('Categoría actualizada correctamente');
+    categoriaEnEdicion = null; // limpiamos el estado de edición
+  } else {
+    // 🟢 Si estamos creando
+    await crearCategoria({ nombre, descripcion, imagen });
+    alert('Categoría creada exitosamente');
+  }
+
+  modal.style.display = 'none';
+  form.reset();
+  cargarCategorias();
+
+} catch (error) {
+  console.error('Error al guardar categoría:', error);
+  alert('No se pudo guardar la categoría');
+}
+
     });
   }
+  
 });
