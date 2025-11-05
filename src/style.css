@@ -59,6 +59,7 @@ header{
     font-size: 1.2rem;
     color: var(--primary);
     margin-bottom: 1rem;
+    padding: 10px;
 }
 
 .nav__list{
@@ -270,7 +271,7 @@ button{
 .principal-section {
   padding: 2rem;
   margin-left: 2rem;
-  background-color: #f8f9fb;
+  background-color: var(--bgColor);
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -446,5 +447,58 @@ button{
 
 .modal-content h3 {
   text-align: left;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.filter-bar__input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #333;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.filter-bar__input:focus {
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+}
+
+.filter-bar__actions {
+  display: flex;
+  gap: 0.7rem;
+  flex-shrink: 0;
+}
+
+.filter-bar__select {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.filter-bar__select:focus {
+  border-color: #ff6b35;
+}
+
+.filter-bar__search {
+  flex: 1;
 }
 
