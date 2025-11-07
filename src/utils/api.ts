@@ -1,4 +1,5 @@
 import type { IUser } from "../types/IUser";
+import type { IProduct } from "../types/IProduct";
 
 const direccionUrl: string = "http://localhost:8080/usuario"
 
@@ -127,3 +128,74 @@ export async function editarCategoria(
 
   return data;
 }
+
+//-------------------------------------------------------------------------------------------------------------------------
+// ENDPOINTS PARA PRODUCTOS
+//-------------------------------------------------------------------------------------------------------------------------
+
+const urlProducto: string = "http://localhost:8080/producto"
+// 🔹 Crear producto (POST)
+export const crearProducto = async (data: Omit<IProduct, "id">) => {
+  const response = await fetch(urlProducto, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Error HTTP:", response.status, errorText);
+    throw new Error(`Error HTTP: ${response.status} - ${errorText}`);
+  }
+
+  const result = await response.json();
+  console.log("Producto creado:", result);
+  return result;
+};
+
+// 🔹 Obtener todos los productos (GET)
+export const obtenerProductos = async (): Promise<IProduct[]> => {
+  try {
+    const res = await fetch(urlProducto);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const datos: IProduct[] = await res.json();
+    return datos;
+  } catch (err) {
+    console.error("Error al obtener los productos:", err);
+    throw err;
+  }
+};
+
+// 🔹 Editar producto (PUT)
+export const editarProductos = async (id: number, data: Partial<IProduct>) => {
+  const response = await fetch(`${urlProducto}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Error HTTP ${response.status}: ${errorText}`);
+  }
+
+  const result = await response.json();
+  console.log("Producto actualizado:", result);
+  return result;
+};
+
+// 🔹 Eliminar producto (DELETE) — opcional
+export const eliminarProducto = async (id: number) => {
+  const response = await fetch(`${urlProducto}/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Error HTTP ${response.status}: ${errorText}`);
+  }
+  const result = await response.text();
+  return result;
+};

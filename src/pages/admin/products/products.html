@@ -40,10 +40,10 @@
       <section class="principal-section">
        <div class="section-header">
          <h1>Gestión de Productos</h1>
-         <button class="btn-update" id="btnNuevaCategoria">+ Nuevo Producto</button>
+         <button class="btn-update" id="btnNuevoProducto">+ Nuevo Producto</button>
        </div>
 
-        <table class="Tables" id="tablaCategorias">
+        <table class="Tables" id="tablaProducto">
           <thead class="TableHead">
             <tr>
               <th>ID</th>
@@ -57,13 +57,13 @@
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody id="categoriasBody"></tbody>
+          <tbody id="productosBody"></tbody>
         </table>
 
-        <div id="modalCategoria" class="modal" style="display: none;">
+        <div id="modalProducto" class="modal" style="display: none;">
           <div class="modal-content">
-            <h2>Nueva Categoría</h2>
-            <form id="formCategoria">
+            <h2>Nuevo Producto</h2>
+            <form id="formProducto">
               <label for="nombre">Nombre:</label>
               <input type="text" id="nombre" name="nombre" required />
 
@@ -79,7 +79,7 @@
               <label for="categoria">Categoría:</label>
               <form>
                 <label for="categoria">Categoría</label>
-                <select id="categoria" name="categoria" required>
+                <select id="categoria" name="categoria">
                   
                 </select>
 
