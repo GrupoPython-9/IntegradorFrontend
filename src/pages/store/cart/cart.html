@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Carrito</title>
+  <link rel="stylesheet" href="../../../style.css" />
+</head>
+<body>
+
+    <header>
+      <nav class="contenedor__nav">
+        <h2 class="nav__title">🍕Food Store</h2>
+        <ul class="nav__list">
+          <li><a class="nav__links active" href="inicio">Inicio</a></li>
+          <li><a class="nav__links" href="MisPedidos">Mis Pedidos</a></li>
+          <li><a class="nav__links" href="../../admin/adminHome/adminHome.html">Administración</a></li>
+          <li><a class="nav__links" href="Carrito">Carrito</a></li>
+          <li><a class="nav__links" href="Usuario">Usuario</a></li>
+          <li><button class="Cancelar">Cerrar Sesión</button></li>
+        </ul>
+      </nav>
+    </header>
+
+  <main class="carrito">
+    <h1>🛒 Mi Carrito</h1>
+
+    <aside class="carrito__resumen" id="carrito-resumen" style="display: none;">
+      <h2>Resumen del Pedido</h2>
+      <p id="subtotal">Subtotal: $0</p>
+      <p id="envio">Envío: $0</p>
+      <p><strong id="total">Total: $0</strong></p>
+      <button class="btn btn-pago">Proceder al Pago</button>
+      <button class="btn btn-vaciar">Vaciar Carrito</button>
+    </aside>
+
+    <section class="carrito__items" id="carrito-items">
+      <!-- Los productos se insertarán dinámicamente acá -->
+      <p id="carrito-vacio">Tu carrito está vacío.</p>
+    </section>
+    
+  </main>
+
+  <script type="module" src="../../scripts/carrito.ts"></script>
+</body>
+</html>

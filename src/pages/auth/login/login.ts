@@ -47,7 +47,7 @@ console.log("Rol recibido:", usuario.rol);
     if (usuario.rol.toUpperCase() === "ADMIN") {
       window.location.href = "../../admin/adminHome/adminHome.html";
     } else {
-      window.location.href = "../../client/home/home.html";
+      window.location.href = "../../store/home/home.html";
     }
 
   } catch (error) {

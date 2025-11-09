@@ -604,5 +604,101 @@ p {
   gap: 0.8rem;
 }
 
+/* Layout general */
+.cart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2rem;
+  gap: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
 
+/* Lista de productos */
+.cart__items {
+  flex: 2;
+}
 
+.cart__item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1rem;
+  align-items: center;
+}
+
+.cart__item img {
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.cart__detalle h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.cart__detalle p {
+  margin: 0.25rem 0;
+  color: #333;
+}
+
+/* Resumen del pedido */
+.cart__resumen {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  min-width: 250px;
+}
+
+.cart__resumen h2 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.cart__resumen p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* Botones */
+.btn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-pago {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-pago:hover {
+  background-color: #218838;
+}
+
+.btn-vaciar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-vaciar:hover {
+  background-color: #c82333;
+}
+
+/* Mensaje de carrito vacío */
+#carrito-vacio {
+  font-style: italic;
+  color: #777;
+  margin-top: 1rem;
+}
