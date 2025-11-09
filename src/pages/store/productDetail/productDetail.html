@@ -24,34 +24,35 @@
       </nav>
     </header>
 
-```
 <main class="principal-section">
-  <h1>Vista detalle de producto</h1>
 
-  <section class="product-detail">
-    <div class="product-detail__image">
-      <img src="../../../assets/hamburguesa.jpg" alt="Hamburguesa triple" />
-    </div>
-
-    <div class="product-detail__info">
-      <h2>Hamburguesa triple</h2>
-      <p class="product-detail__price">$25.000,00</p>
-      <span class="product-detail__stock">Disponible (Stock: 20)</span>
-      <p class="product-detail__desc">Hamburguesa triple smash</p>
-
-      <div class="product-detail__quantity">
-        <label for="cantidad">Cantidad:</label>
-        <button class="btn-edit" id="restar">−</button>
-        <input type="number" id="cantidad" value="1" min="1" />
-        <button class="btn-edit" id="sumar">+</button>
+    <section class="product-grid">
+      <div class="product-detail__image">
+        <img id="productImage" src="" alt="Imagen del producto" />
       </div>
 
-      <div class="product-detail__actions">
-        <button class="btn-submit" id="agregarCarrito">🛒 Agregar al Carrito</button>
-        <button class="btn-edit" onclick="window.history.back()">← Volver</button>
+      <div class="product-detail__info">
+        <div>
+          <h1 id="productTitle"></h1>
+          <p id="productPrice" class="product-card__price"></p>
+          <span id="productStatus" class="product-card__status"></span>
+          <p id="productDescription"></p>
+
+          <div class="product-detail__quantity">
+            <label for="cantidad">Cantidad:</label>
+            <button class="btn-edit" id="restar">−</button>
+            <input type="number" id="cantidad" value="1" min="1" />
+            <button class="btn-edit" id="sumar">+</button>
+          </div>
+
+          <div class="product-detail__actions">
+            <button class="btn-submit" id="agregarCarrito">🛒 Agregar al Carrito</button>
+            <button class="btn-edit" onclick="window.history.back()">← Volver</button>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 </main>
+<script type="module" src="./productDetail.ts"></script>
   </body>
 </html>

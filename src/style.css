@@ -164,7 +164,7 @@ button{
   flex-direction: column;
   align-items: stretch;
 }
-.sidebar p {
+p {
   margin-left: 2rem;
   color: #555;
   font-size: 0.9rem;
@@ -501,4 +501,108 @@ button{
 .filter-bar__search {
   flex: 1;
 }
+
+/* Estilos para las tarjetas de productos */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    justify-items: start;
+}
+
+.product-card {
+  flex: 1 1 220px; 
+  width: 100%;
+  max-width: 280px; 
+  min-height: 360px; 
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.product-card__img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.product-card__info {
+  padding: 1rem;
+}
+
+.product-card__body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-card__category {
+  background-color: #f3f4f6;
+  color: #555;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 8px;
+  align-self: flex-start;
+}
+
+.product-card__title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 0.4rem;
+}
+
+.product-card__desc {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.product-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.product-card__price {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom:1rem;
+  align-self: flex-start;
+}
+
+.product-card__status {
+  background-color: var(--success);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  max-width: fit-content;
+}
+
+.product-detail__info > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+
 
