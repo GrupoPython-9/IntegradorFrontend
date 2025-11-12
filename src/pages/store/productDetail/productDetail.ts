@@ -4,7 +4,7 @@
 // import { obtenerProductos } from '../../../utils/api';
 // import type { IProduct } from '../../../types/IProduct';
 
-import { mostrarAlerta } from "../../../utils/api";
+import { mostrarAlerta } from "../../../utils/alerts";
 
 interface Producto {
   id: number;
