@@ -1,7 +1,7 @@
 // src/pages/store/cart/cart.ts
 
-import { mostrarAlerta } from "../../../utils/api";
-import { mostrarConfirmacion } from "../../../utils/api";
+import { mostrarAlerta } from "../../../utils/alerts";
+import { mostrarConfirmacion } from "../../../utils/alerts";
 
 const ENVIO_COSTO = 500;
 
