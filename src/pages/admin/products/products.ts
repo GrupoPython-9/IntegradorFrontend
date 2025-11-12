@@ -103,6 +103,7 @@ const cargarCategoriasSelect = async () => {
 // Abrir modal (nuevo o edición)
 // ───────────────────────────────
 const abrirModal = async (producto?: IProduct) => {
+  console.log("Se abrió el modal de producto", producto);
   modalProducto.style.display = "block";
   formProducto.reset();
   await cargarCategoriasSelect()

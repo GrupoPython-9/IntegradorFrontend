@@ -63,6 +63,7 @@ export async function getCategorias() {
   const data = await response.json();
 
   // ⚠️ El array real está en data.datos
+  
   return data.datos;
 }
 
