@@ -16,7 +16,7 @@ interface Producto {
 async function obtenerProductoPorId(id: number): Promise<Producto> {
   // Simulación de datos sin backend
   return {
-    id,
+    id:2,
     nombre: "Hamburguesa triple",
     precio: 25000,
     descripcion: "Hamburguesa triple smash",

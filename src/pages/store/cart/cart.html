@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mi Carrito</title>
   <link rel="stylesheet" href="../../../style.css" />
 </head>
+
 <body>
 
-    <header>
-      <nav class="contenedor__nav">
-        <h2 class="nav__title">🍕Food Store</h2>
-        <ul class="nav__list">
-          <li><a class="nav__links active" href="inicio">Inicio</a></li>
-          <li><a class="nav__links" href="MisPedidos">Mis Pedidos</a></li>
-          <li><a class="nav__links" href="../../admin/adminHome/adminHome.html">Administración</a></li>
-          <li><a class="nav__links" href="Carrito">Carrito</a></li>
-          <li><a class="nav__links" href="Usuario">Usuario</a></li>
-          <li><button class="Cancelar">Cerrar Sesión</button></li>
-        </ul>
-      </nav>
-    </header>
+  <header>
+    <nav class="contenedor__nav">
+      <h2 class="nav__title">🍕Food Store</h2>
+      <ul class="nav__list">
+        <li><a class="nav__links active" href="../home/home.html">Inicio</a></li>
+        <li><a class="nav__links" href="../../client/orders/orders.html">Mis Pedidos</a></li>
+        <li><a class="nav__links" href="../../admin/adminHome/adminHome.html">Administración</a></li>
+        <li><a class="nav__links" href="Carrito">Carrito</a></li>
+        <li><a class="nav__links" href="Usuario">Usuario</a></li>
+        <li><button class="Cancelar">Cerrar Sesión</button></li>
+      </ul>
+    </nav>
+  </header>
 
   <main class="carrito">
     <h1>🛒 Mi Carrito</h1>
@@ -38,9 +40,50 @@
       <!-- Los productos se insertarán dinámicamente acá -->
       <p id="carrito-vacio">Tu carrito está vacío.</p>
     </section>
-    
+
   </main>
   <script type="module" src="../cart/cart.ts"></script>
   <!--<script type="module" src="../../scripts/carrito.ts"></script> -->
+
+  <div id="modal-pedido" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2>🧾 Completar Pedido</h2>
+      <form id="form-pedido" class="form-pedido">
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" placeholder="+54 9 261 123-4567" required />
+        </div>
+
+        <div class="form-group">
+          <label for="direccion">Dirección de Entrega</label>
+          <input type="text" id="direccion" placeholder="Calle, número, piso, depto" required />
+        </div>
+
+        <div class="form-group">
+          <label for="metodoPago">Método de Pago</label>
+          <select id="metodoPago" required>
+            <option value="">Seleccione un método</option>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Tarjeta">Tarjeta</option>
+            <option value="Transferencia">Transferencia</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="nota">Notas adicionales (opcional)</label>
+          <textarea id="nota" placeholder="Instrucciones especiales, timbre, etc."></textarea>
+        </div>
+
+        <p class="total-pagar" id="total-pagar">Total a pagar: $0</p>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-confirmar">Confirmar Pedido</button>
+          <button type="button" id="cerrar-modal" class="btn-cerrar">Cerrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </body>
+
 </html>
