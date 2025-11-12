@@ -4,7 +4,9 @@ import {
   crearProducto,
   editarProductos,
   eliminarProducto,
+  getCategorias,
 } from "../../../utils/api";
+import type { ICategoria } from "../../../types/ICategoria";
 
 // ───────────────────────────────
 // Elementos del DOM
@@ -70,21 +72,53 @@ const cargarProductos = async () => {
   }
 };
 
+// 🔹 Función para cargar categorías en el select
+const cargarCategoriasSelect = async () => {
+  try {
+    const categorias: ICategoria[] = await getCategorias();
+    const select = document.getElementById("categoria") as HTMLSelectElement;
+
+    // Limpiar opciones previas
+    select.innerHTML = "";
+
+    // Agregar opción por defecto
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Seleccionar categoría";
+    select.appendChild(defaultOption);
+
+    // Agregar cada categoría
+    categorias.forEach((cat) => {
+      const option = document.createElement("option");
+      option.value = cat.id.toString(); // Importante: el id
+      option.textContent = cat.nombre;
+      select.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error al cargar categorías:", error);
+  }
+};
+
 // ───────────────────────────────
 // Abrir modal (nuevo o edición)
 // ───────────────────────────────
-const abrirModal = (producto?: IProduct) => {
+const abrirModal = async (producto?: IProduct) => {
   modalProducto.style.display = "block";
   formProducto.reset();
-
+  await cargarCategoriasSelect()
   if (producto) {
     // Modo edición
     productoEnEdicion = producto;
-    (document.getElementById("nombre") as HTMLInputElement).value = producto.nombre;
-    (document.getElementById("descripcion") as HTMLInputElement).value = producto.descripcion;
-    (document.getElementById("precio") as HTMLInputElement).value = producto.precio.toString();
-    (document.getElementById("stock") as HTMLInputElement).value = producto.stock.toString();
+    (document.getElementById("nombreProducto") as HTMLInputElement).value = producto.nombre;
+    (document.getElementById("descripcionProducto") as HTMLInputElement).value = producto.descripcion;
+    (document.getElementById("precioProducto") as HTMLInputElement).value = producto.precio.toString();
+    (document.getElementById("stockProducto") as HTMLInputElement).value = producto.stock.toString();
     (document.getElementById("imagen") as HTMLInputElement).value = producto.imagen;
+
+    const selectCategoria = document.getElementById("categoria") as HTMLSelectElement;
+    if (producto.categoria) {
+      selectCategoria.value = producto.categoria.toString();
+    }
 
     const title = modalProducto.querySelector("h2");
     if (title) title.textContent = "Editar Producto";
@@ -117,12 +151,16 @@ window.addEventListener("click", (e) => {
 formProducto.addEventListener("submit", async (e: SubmitEvent) => {
   e.preventDefault();
 
+  const categoriaSelect = document.getElementById("categoria") as HTMLSelectElement;
+  const categoriaId = parseInt(categoriaSelect.value);
+
   const data = {
-    nombre: (document.getElementById("nombre") as HTMLInputElement).value,
-    descripcion: (document.getElementById("descripcion") as HTMLInputElement).value,
-    precio: parseFloat((document.getElementById("precio") as HTMLInputElement).value),
-    stock: parseInt((document.getElementById("stock") as HTMLInputElement).value),
+    nombre: (document.getElementById("nombreProducto") as HTMLInputElement).value,
+    descripcion: (document.getElementById("descripcionProducto") as HTMLInputElement).value,
+    precio: parseFloat((document.getElementById("precioProducto") as HTMLInputElement).value),
+    stock: parseInt((document.getElementById("stockProducto") as HTMLInputElement).value),
     imagen: (document.getElementById("imagen") as HTMLInputElement).value,
+    categoria: categoriaId,
   };
 
   try {
