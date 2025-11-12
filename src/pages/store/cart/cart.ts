@@ -1,5 +1,8 @@
 // src/pages/store/cart/cart.ts
 
+import { mostrarAlerta } from "../../../utils/api";
+import { mostrarConfirmacion } from "../../../utils/api";
+
 const ENVIO_COSTO = 500;
 
 const carritoItems = document.getElementById("carrito-items") as HTMLElement;
@@ -128,10 +131,11 @@ carritoItems.addEventListener("change", (e) => {
 });
 
 btnVaciar.addEventListener("click", () => {
-  if (confirm("¿Vaciar el carrito?")) {
+  mostrarConfirmacion("¿Vaciar el carrito?", () => {
     clearCart();
     renderCart();
-  }
+    mostrarAlerta("🗑️ Carrito vaciado");
+  });
 });
 
 document.addEventListener("DOMContentLoaded", renderCart);
@@ -182,10 +186,10 @@ form.addEventListener("submit", async (e) => {
 
     clearCart();
     modal.style.display = "none";
-    alert("✅ Pedido confirmado");
+    mostrarAlerta("✅ Pedido confirmado");
     window.location.href = "../orders/orders.html";
   } catch (error) {
-    alert("❌ No se pudo confirmar el pedido");
+    mostrarAlerta("❌ No se pudo confirmar el pedido");
     console.error(error);
   }
 });

@@ -4,6 +4,8 @@
 // import { obtenerProductos } from '../../../utils/api';
 // import type { IProduct } from '../../../types/IProduct';
 
+import { mostrarAlerta } from "../../../utils/api";
+
 interface Producto {
   id: number;
   nombre: string;
@@ -124,12 +126,12 @@ async function mostrarProducto() {
   btnAgregar.addEventListener("click", () => {
     const cantidad = parseInt(inputCantidad.value);
     if (cantidad < 1 || cantidad > stockMaximo) {
-      alert("Cantidad no válida");
+      mostrarAlerta("Cantidad no válida");
       return;
     }
 
     addToCart(producto, cantidad);
-    alert(`✅ ${producto.nombre} (${cantidad} unidad/es) agregado al carrito`);
+    mostrarAlerta(`✅ ${producto.nombre} (${cantidad} unidad/es) agregado al carrito`);
   });
 } else {
   console.warn("⚠️ No se encontró el botón 'agregarCarrito' en el DOM.");
@@ -141,5 +143,3 @@ async function mostrarProducto() {
 
 // Ejecutar al cargar la página
 document.addEventListener("DOMContentLoaded", mostrarProducto);
-
-
