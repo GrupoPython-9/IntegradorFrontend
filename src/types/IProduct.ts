@@ -5,6 +5,6 @@ export interface IProduct {
     descripcion: string;
     stock: number;
     imagen: string;
-    estado?: string; // "activo" | "inactivo"
-    categoria?: string | number;
+    
+    
 }

@@ -28,7 +28,7 @@ const renderProductos = (productos: IProduct[]) => {
 
   productos.forEach((p) => {
     const row = document.createElement("tr");
-    const isActive = p.estado !== "inactivo";
+    
 
     row.innerHTML = `
       <td>${p.id}</td>
@@ -40,7 +40,7 @@ const renderProductos = (productos: IProduct[]) => {
       <td>${p.stock}</td>
       <td>
         <label class="switch">
-          <input type="checkbox" class="chk-estado" data-id="${p.id}" ${isActive ? "checked" : ""}>
+          <input type="checkbox" class="chk-estado" data-id= "checked" : ""}>
           <span class="slider round"></span>
         </label>
       </td>
@@ -63,15 +63,12 @@ const cargarProductos = async () => {
   try {
     const productos = await obtenerProductos();
 
-    // 🔹 Filtrar solo productos activos
-    const productosActivos = productos.filter(p => p.estado === "activo");
-
     renderProductos(productos);
   } catch (error) {
     console.error("Error al cargar productos:", error);
   }
 };
-
+/*
 // 🔹 Función para cargar categorías en el select
 const cargarCategoriasSelect = async () => {
   try {
@@ -98,7 +95,7 @@ const cargarCategoriasSelect = async () => {
     console.error("Error al cargar categorías:", error);
   }
 };
-
+*/
 // ───────────────────────────────
 // Abrir modal (nuevo o edición)
 // ───────────────────────────────
@@ -106,7 +103,7 @@ const abrirModal = async (producto?: IProduct) => {
   console.log("Se abrió el modal de producto", producto);
   modalProducto.style.display = "block";
   formProducto.reset();
-  await cargarCategoriasSelect()
+  
   if (producto) {
     // Modo edición
     productoEnEdicion = producto;
@@ -116,11 +113,8 @@ const abrirModal = async (producto?: IProduct) => {
     (document.getElementById("stockProducto") as HTMLInputElement).value = producto.stock.toString();
     (document.getElementById("imagen") as HTMLInputElement).value = producto.imagen;
 
-    const selectCategoria = document.getElementById("categoria") as HTMLSelectElement;
-    if (producto.categoria) {
-      selectCategoria.value = producto.categoria.toString();
-    }
-
+    //const selectCategoria = document.getElementById("categoria") as HTMLSelectElement;
+    
     const title = modalProducto.querySelector("h2");
     if (title) title.textContent = "Editar Producto";
   } else {
@@ -153,7 +147,7 @@ formProducto.addEventListener("submit", async (e: SubmitEvent) => {
   e.preventDefault();
 
   const categoriaSelect = document.getElementById("categoria") as HTMLSelectElement;
-  const categoriaId = parseInt(categoriaSelect.value);
+  //const categoriaId = parseInt(categoriaSelect.value);
 
   const data = {
     nombre: (document.getElementById("nombreProducto") as HTMLInputElement).value,
@@ -161,7 +155,7 @@ formProducto.addEventListener("submit", async (e: SubmitEvent) => {
     precio: parseFloat((document.getElementById("precioProducto") as HTMLInputElement).value),
     stock: parseInt((document.getElementById("stockProducto") as HTMLInputElement).value),
     imagen: (document.getElementById("imagen") as HTMLInputElement).value,
-    categoria: categoriaId,
+    
   };
 
   try {
@@ -213,6 +207,7 @@ productosBody.addEventListener("click", async (e: MouseEvent) => {
   }
 });
 
+/*
 // 🔄 Checkbox de estado
 productosBody.addEventListener("change", async (e: Event) => {
   const target = e.target as HTMLInputElement;
@@ -229,7 +224,7 @@ productosBody.addEventListener("change", async (e: Event) => {
     target.checked = !target.checked; // revertir si falla
   }
 });
-
+*/
 // ───────────────────────────────
 // Inicialización
 // ───────────────────────────────
