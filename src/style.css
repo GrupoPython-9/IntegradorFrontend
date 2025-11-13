@@ -604,10 +604,12 @@ p {
   gap: 0.8rem;
 }
 
-/* Layout general */
-.cart {
+/* Layout general cambie cart por carrito*/
+
+.carrito {
   display: flex;
-  flex-direction: row;
+  flex-direction: row; 
+  align-items: center;
   justify-content: space-between;
   padding: 2rem;
   gap: 2rem;
@@ -619,7 +621,7 @@ p {
   flex: 2;
 }
 
-.cart__item {
+.carrito__item {
   display: flex;
   gap: 1rem;
   margin-bottom: 1.5rem;
@@ -635,18 +637,18 @@ p {
   object-fit: cover;
 }
 
-.cart__detalle h3 {
+.carrito__detalle h3 {
   margin: 0;
   font-size: 1.2rem;
 }
 
-.cart__detalle p {
+.carrito__detalle p {
   margin: 0.25rem 0;
   color: #333;
 }
 
 /* Resumen del pedido */
-.cart__resumen {
+.carrito__resumen {
   flex: 1;
   border: 1px solid #ccc;
   padding: 1rem;
@@ -655,12 +657,12 @@ p {
   min-width: 250px;
 }
 
-.cart__resumen h2 {
+.carrito__resumen h2 {
   margin-bottom: 1rem;
   font-size: 1.3rem;
 }
 
-.cart__resumen p {
+.carrito__resumen p {
   margin: 0.5rem 0;
   font-size: 1rem;
 }
@@ -968,4 +970,114 @@ p {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/*Carrito productos div*/
+.carrito__items {
+  display: flex;
+  flex-wrap: wrap;        /* Permite que salten de línea si no caben */
+  gap: 20px;              /* Espacio entre productos */
+  justify-content: center; /* Centra los productos horizontalmente */
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.carrito__items .item-nuevo {
+  flex: 0 0 280px;     /* Cada tarjeta tiene ancho fijo */
+  max-width: 280px;
+  box-sizing: border-box;
+}
+
+.carrito__items img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Tarjetas de producto */
+.item-nuevo {
+  flex: 0 0 280px;        /* Cada producto ocupa 280px de ancho fijo */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item-nuevo:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Información del producto */
+.item-info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.item-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Acciones del producto */
+.item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 5px;
+}
+
+/* Botones de cantidad */
+.qty-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.qty-btn:hover {
+  background-color: #218838;
+}
+
+/* Input */
+.qty-input {
+  width: 50px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 30px;
+}
+
+/* Total */
+.item-total {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Botón eliminar */
+.delete-item {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform 0.2s ease;
+}
+
+.delete-item:hover {
+  transform: scale(1.2);
+  color: #dc3545;
 }

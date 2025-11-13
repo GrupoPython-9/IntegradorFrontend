@@ -50,6 +50,7 @@ function renderCart() {
     itemEl.dataset.id = item.id;
 
     itemEl.innerHTML = `
+      <div class= "item-nuevo">
       <div class="item-info">
         <h3>${item.nombre}</h3>
         <p>${item.descripcion || ""}</p>
@@ -61,6 +62,7 @@ function renderCart() {
         <button class="qty-btn" data-action="increase">+</button>
         <span class="item-total">$${(item.cantidad * item.precio).toFixed(2)}</span>
         <button class="delete-item">🗑️</button>
+      </div>
       </div>
       <hr>
     `;
