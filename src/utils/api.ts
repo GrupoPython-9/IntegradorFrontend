@@ -200,3 +200,5 @@ export const eliminarProducto = async (id: number) => {
   const result = await response.text();
   return result;
 };
+
+

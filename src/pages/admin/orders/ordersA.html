@@ -28,8 +28,8 @@
       <select id="filtro-estado" class="select-filtro">
         <option value="TODOS">Todos los pedidos</option>
         <option value="PENDIENTE">Pendientes</option>
-        <option value="PROCESO">En preparación</option>
-        <option value="ENTREGADO">Entregados</option>
+        <option value="CONFIRMADO">Confirmado</option>
+        <option value="TERMINADO">Terminado</option>
         <option value="CANCELADO">Cancelados</option>
       </select>
     </div>
@@ -51,11 +51,12 @@
         <label for="nuevo-estado">Cambiar Estado:</label>
         <select id="nuevo-estado">
           <option value="PENDIENTE">Pendiente</option>
-          <option value="PROCESO">En preparación</option>
-          <option value="ENTREGADO">Entregado</option>
+          <option value="CONFIRMADO">Confirmado</option>
+          <option value="TERMINADO">Terminado</option>
           <option value="CANCELADO">Cancelado</option>
         </select>
         <button id="btn-actualizar" class="btn-actualizar">Actualizar Estado</button>
+        <button id="btn-eliminar" class="btn-eliminar">Eliminar Pedido</button>
       </div>
 
     </div>

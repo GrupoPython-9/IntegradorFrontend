@@ -2,6 +2,7 @@
 
 import { mostrarAlerta } from "../../../utils/alerts";
 
+
 const listaPedidos = document.getElementById("lista-pedidos") as HTMLElement;
 const filtroEstado = document.getElementById("filtro-estado") as HTMLSelectElement;
 
@@ -144,6 +145,41 @@ btnActualizar.addEventListener("click", async () => {
 // ===============================================================
 
 filtroEstado.addEventListener("change", renderPedidos);
+
+// ===============================================================
+// ELIMINAR PEDIDO (DELETE)
+// ===============================================================
+
+const btnEliminar = document.getElementById("btn-eliminar") as HTMLButtonElement;
+
+btnEliminar.addEventListener("click", async () => {
+  if (!pedidoSeleccionado) return;
+
+  const confirmar = confirm(`¿Eliminar el pedido #${pedidoSeleccionado.id}?`);
+
+  if (!confirmar) return;
+
+  const id = pedidoSeleccionado.id;
+
+  try {
+    const response = await fetch(`http://localhost:8080/api/pedidos/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) throw new Error("Error al eliminar pedido");
+
+    mostrarAlerta("🗑️ Pedido eliminado correctamente");
+
+    modal.style.display = "none";
+
+    await cargarPedidos();
+
+  } catch (error) {
+    console.error(error);
+    mostrarAlerta("❌ No se pudo eliminar el pedido");
+  }
+});
+
 
 // Inicializar
 cargarPedidos();

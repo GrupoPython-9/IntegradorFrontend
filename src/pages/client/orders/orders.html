@@ -9,6 +9,7 @@
 </head>
 
 <body>
+
     <header>
         <nav class="contenedor__nav">
             <h2 class="nav__title">🍕 Food Store</h2>
@@ -23,12 +24,26 @@
 
     <main class="orders">
         <h1>📦 Mis Pedidos</h1>
-        <section id="orders-list">
-            <!-- Los pedidos se insertan dinámicamente -->
+
+        <section id="orders-list" class="orders-list">
+            <!-- Se insertan dinámicamente -->
         </section>
+
     </main>
 
+    <!-- MODAL DETALLE DEL PEDIDO -->
+    <div id="modal-detalle" class="modal" style="display: none;">
+        <div class="modal-content">
+            <button id="close-modal" class="modal-close">✖</button>
+
+            <div id="modal-body">
+                <!-- el contenido lo genera orders.ts -->
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="./orders.ts"></script>
+
 </body>
 
 </html>
