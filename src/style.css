@@ -1081,3 +1081,200 @@ p {
   transform: scale(1.2);
   color: #dc3545;
 }
+
+
+/* ============================================================
+   CONTENEDOR GENERAL
+   ============================================================ */
+.contenedor {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #2d3436;
+}
+
+/* ============================================================
+   SELECT FILTRO
+   ============================================================ */
+.filtro-contenedor {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.select-filtro {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ============================================================
+   LISTA DE PEDIDOS
+   ============================================================ */
+.lista-pedidos {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ============================================================
+   CARD DE PEDIDO
+   ============================================================ */
+.card-pedido {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 22px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.card-pedido:hover {
+  transform: scale(1.01);
+  box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.15);
+}
+
+.pedido-card h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.pedido-card p {
+  margin: 4px 0;
+}
+
+.precio-total {
+  text-align: right;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff6b35;
+}
+
+/* ============================================================
+   BADGES DE ESTADO
+   ============================================================ */
+.badge {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+/* Pendiente */
+.estado-pendiente {
+  background: #f39c12;
+}
+
+/* En proceso */
+.estado-proceso {
+  background: #3498db;
+}
+
+/* Entregado */
+.estado-entregado {
+  background: #2ecc71;
+}
+
+/* Cancelado */
+.estado-cancelado {
+  background: #e74c3c;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 14px;
+  padding: 25px;
+  width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.btn-cerrar-modal {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* ============================================================
+   DETALLE DEL PEDIDO
+   ============================================================ */
+.detalle-pedido p {
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+.producto-detalle {
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+/* ============================================================
+   CAMBIAR ESTADO
+   ============================================================ */
+.cambiar-estado {
+  margin-top: 20px;
+}
+
+.cambiar-estado label {
+  font-size: 15px;
+}
+
+#nuevo-estado {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+}
+
+.btn-actualizar {
+  width: 100%;
+  margin-top: 12px;
+  background: #00b894;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+
+.btn-actualizar:hover {
+  background: #019a79;
+}

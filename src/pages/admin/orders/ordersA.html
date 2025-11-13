@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Pedidos</title>
+  <link rel="stylesheet" href="../../../style.css" />
+</head>
+
+<body>
+
+  <header>
+    <nav class="contenedor__nav">
+      <h2 class="nav__title">🍕Food Store</h2>
+      <ul class="nav__list">
+        <li><a class="nav__links" href="../../store/home/home.html">Tienda</a></li>
+        <li><a class="nav__links" href="../adminHome/adminHome.html">Panel Admin</a></li>
+        <li><button class="Cancelar">Cerrar Sesión</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contenedor">
+    <h1>Gestión de Pedidos</h1>
+
+    <!-- Filtro -->
+    <div class="filtro-contenedor">
+      <select id="filtro-estado" class="select-filtro">
+        <option value="TODOS">Todos los pedidos</option>
+        <option value="PENDIENTE">Pendientes</option>
+        <option value="PROCESO">En preparación</option>
+        <option value="ENTREGADO">Entregados</option>
+        <option value="CANCELADO">Cancelados</option>
+      </select>
+    </div>
+
+    <!-- Contenedor de pedidos -->
+    <section id="lista-pedidos" class="lista-pedidos"></section>
+  </main>
+
+  <!-- ========= MODAL DETALLE PEDIDO ========= -->
+  <div id="modal-pedido" class="modal" style="display: none;">
+    <div class="modal-content modal-detalle">
+
+      <button id="cerrar-modal" class="btn-cerrar-modal">✖</button>
+      <h2 id="titulo-pedido"></h2>
+
+      <div id="detalle-pedido" class="detalle-pedido"></div>
+
+      <div class="cambiar-estado">
+        <label for="nuevo-estado">Cambiar Estado:</label>
+        <select id="nuevo-estado">
+          <option value="PENDIENTE">Pendiente</option>
+          <option value="PROCESO">En preparación</option>
+          <option value="ENTREGADO">Entregado</option>
+          <option value="CANCELADO">Cancelado</option>
+        </select>
+        <button id="btn-actualizar" class="btn-actualizar">Actualizar Estado</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module" src="./ordersA.ts"></script>
+
+</body>
+</html>
