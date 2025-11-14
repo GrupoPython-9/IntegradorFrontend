@@ -46,8 +46,8 @@ const renderProductos = (productos: IProduct[]) => {
       </td>
       <td>
         <div class="acciones-container">
-          <button class="btn-editar" data-id="${p.id}">Editar</button>
-          <button class="btn-borrar" data-id="${p.id}">Eliminar</button>
+          <button class="btn btn-edit" data-id="${p.id}">Editar</button>
+          <button class="btn btn-delete" data-id="${p.id}">Eliminar</button>
         </div>
       </td>
     `;
@@ -182,7 +182,7 @@ productosBody.addEventListener("click", async (e: MouseEvent) => {
   const id = Number(target.dataset.id);
 
   // 🗑️ Eliminar (soft delete)
-  if (target.classList.contains("btn-borrar")) {
+  if (target.classList.contains("btn-delete")) {
     const confirmDelete = confirm("¿Seguro que deseas eliminar este producto?");
     if (!confirmDelete) return;
 
@@ -196,7 +196,7 @@ productosBody.addEventListener("click", async (e: MouseEvent) => {
   }
 
   // ✏️ Editar
-  if (target.classList.contains("btn-editar")) {
+  if (target.classList.contains("btn-update")) {
     try {
       const productos = await obtenerProductos();
       const producto = productos.find((p) => p.id === id);
