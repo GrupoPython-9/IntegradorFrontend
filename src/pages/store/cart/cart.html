@@ -19,21 +19,21 @@
         <li><a class="nav__links" href="../../admin/adminHome/adminHome.html">Administración</a></li>
         <li><a class="nav__links" href="../cart/cart.html">Carrito</a></li>
         <li><a class="nav__links" href="Usuario">Usuario</a></li>
-        <li><button class="Cancelar">Cerrar Sesión</button></li>
+        <li><button class="btn btn-edit">Cerrar Sesión</button></li>
       </ul>
     </nav>
   </header>
 
   <main class="carrito">
-    <h1>🛒 Mi Carrito</h1>
+    <h1>Mi Carrito</h1>
 
-    <aside class="carrito__resumen" id="carrito-resumen" style="display: none;">
+    <aside class="carrito__resumen" id="carrito-resumen">
       <h2>Resumen del Pedido</h2>
       <p id="subtotal">Subtotal: $0</p>
       <p id="envio">Envío: $0</p>
       <p><strong id="total">Total: $0</strong></p>
-      <button class="btn btn-pago">Proceder al Pago</button>
-      <button class="btn btn-vaciar">Vaciar Carrito</button>
+      <button class="btn btn-update">Proceder al Pago</button>
+      <button class="btn btn-delete">Vaciar Carrito</button>
     </aside>
 
     <section class="carrito__items" id="carrito-items">
@@ -76,8 +76,8 @@
         <p class="total-pagar" id="total-pagar">Total a pagar: $0</p>
 
         <div class="form-actions">
-          <button type="submit" class="btn-confirmar">Confirmar Pedido</button>
-          <button type="button" id="cerrar-modal" class="btn-cerrar">Cerrar</button>
+          <button type="submit" class="btn btn-update">Confirmar Pedido</button>
+          <span id="cerrarModal" class="btn-cross">&times;</span>
         </div>
       </form>
     </div>

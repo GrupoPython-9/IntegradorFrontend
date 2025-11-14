@@ -90,7 +90,8 @@ header{
 
 /* Buttons */
 
-button{
+.btn{
+    display: inline-block;
     border:none;
     padding: 10px 16px;
     border-radius:6px;
@@ -98,6 +99,7 @@ button{
     font-weight: bold;
     font-size: 1rem;
     transition: background-color 0.3s ease;
+    max-width: fit-content;
 }
 
 .btn-edit{
@@ -106,7 +108,8 @@ button{
 }
 
 .btn-edit:hover{
-    background-color: #b2bec3;
+    background-color: #2d3436;
+    color: #dfe6e9;
 }
 
 .btn-delete{
@@ -114,7 +117,9 @@ button{
     color: #fff;
 }
 
-
+.btn-delete:hover{
+    background-color: #c0392b;
+}
 
 .btn-update{
     background-color: var(--success);
@@ -136,7 +141,7 @@ button{
     background-color: var(--secondary);
 }
 
-.close-btn {
+.btn-cross{
   position: absolute;
   top: 12px;
   right: 18px;
@@ -147,8 +152,18 @@ button{
   font-weight: bold;
 }
 
-.close-btn:hover {
+.btn-cross:hover {
   color: var(--danger);
+}
+
+.btn-card {
+    background-color: #fff;
+    color: var(--accent-color);
+}
+
+
+.btn-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -338,25 +353,6 @@ p {
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1;
-}
-
-
-.stat-card__button {
-    background-color: #fff;
-    color: var(--accent-color);
-    border: none;
-    padding: 0.5rem 1.2rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-}
-
-
-.stat-card__button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .stat-card__subtitle {
@@ -667,37 +663,6 @@ p {
   font-size: 1rem;
 }
 
-/* Botones */
-.btn {
-  display: block;
-  width: 100%;
-  margin-top: 1rem;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.btn-pago {
-  background-color: #28a745;
-  color: white;
-}
-
-.btn-pago:hover {
-  background-color: #218838;
-}
-
-.btn-vaciar {
-  background-color: #dc3545;
-  color: white;
-}
-
-.btn-vaciar:hover {
-  background-color: #c82333;
-}
-
 /* Mensaje de carrito vacío */
 #carrito-vacio {
   font-style: italic;
@@ -768,26 +733,6 @@ p {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-}
-
-.btn-confirmar,
-.btn-cerrar {
-  flex: 1;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.btn-confirmar {
-  background-color: #28a745;
-  color: white;
-}
-
-.btn-cerrar {
-  background-color: #ccc;
-  color: #333;
 }
 
 .orders {
@@ -936,30 +881,6 @@ p {
   box-sizing: border-box;
 }
 
-/* Botón Aceptar: verde */
-.modal-btn-accept {
-  background-color: #28a745;
-  color: white;
-  border: 2px solid #28a745;
-}
-
-.modal-btn-accept:hover {
-  background-color: white;
-  color: #28a745;
-}
-
-/* Botón Cancelar: rojo */
-.modal-btn-cancel {
-  background-color: #F44336;
-  color: white;
-  border: 2px solid #F44336;
-}
-
-.modal-btn-cancel:hover {
-  background-color: white;
-  color: #F44336;
-}
-
 /* === Animación de entrada === */
 @keyframes fadeInModal {
   from {
@@ -1036,23 +957,6 @@ p {
   gap: 5px;
 }
 
-/* Botones de cantidad */
-.qty-btn {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  width: 30px;
-  height: 30px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.qty-btn:hover {
-  background-color: #218838;
-}
-
 /* Input */
 .qty-input {
   width: 50px;
@@ -1067,21 +971,6 @@ p {
   font-weight: bold;
   color: #333;
 }
-
-/* Botón eliminar */
-.delete-item {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  transition: transform 0.2s ease;
-}
-
-.delete-item:hover {
-  transform: scale(1.2);
-  color: #dc3545;
-}
-
 
 /* ============================================================
    CONTENEDOR GENERAL

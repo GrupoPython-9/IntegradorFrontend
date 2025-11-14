@@ -65,11 +65,11 @@ function renderCart() {
           <p>Precio: $${Number(item.precio).toFixed(2)}</p>
         </div>
         <div class="item-actions">
-          <button class="qty-btn" data-action="decrease">-</button>
+          <button class="btn btn-update" data-action="decrease">-</button>
           <input type="number" min="1" value="${item.cantidad}" class="qty-input" />
-          <button class="qty-btn" data-action="increase">+</button>
+          <button class="btn btn-update" data-action="increase">+</button>
           <span class="item-total">$${(item.cantidad * item.precio).toFixed(2)}</span>
-          <button class="delete-item">🗑️</button>
+          <button class="btn btn-delete">🗑️</button>
         </div>
       </div>
       <hr>

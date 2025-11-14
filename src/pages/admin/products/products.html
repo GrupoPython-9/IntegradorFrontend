@@ -16,7 +16,7 @@
           <li><a class="nav__links" href="Tienda">Tienda</a></li>
           <li><a class="nav__links" href="PanelAdmin">Panel Admin</a></li>
           <li><a class="nav__links" href="Usuario">Usuario</a></li>
-          <li><button class="btn-cancel">Cerrar Sesión</button></li>
+          <li><button class="btn btn-edit">Cerrar Sesión</button></li>
         </ul>
       </nav>
     </header>
@@ -40,7 +40,7 @@
       <section class="principal-section">
        <div class="section-header">
          <h1>Gestión de Productos</h1>
-         <button class="btn-update" id="btnNuevoProducto">+ Nuevo Producto</button>
+         <button class="btn btn-update" id="btnNuevoProducto">+ Nuevo Producto</button>
        </div>
 
         <table class="Tables" id="tablaProducto">
@@ -62,7 +62,7 @@
 
         <div id="modalProducto" class="modal hidden">
           <div class="modal-content">
-            <span id="cerrarModal" class="close-btn">&times;</span>
+            <span id="cerrarModal" class="btn-cross">&times;</span>
 
             <form id="formProducto" class="form">
               <h3 class="card__subtitle">Nuevo Producto</h3>
@@ -101,7 +101,6 @@
 
               <label for="categoria">Categoría</label>
                 <select id="categoria" name="categoria" required>
-                  
                 </select>
 
               <label for="imagen">URL de Imagen:</label>
@@ -113,7 +112,7 @@
               />
 
 
-              <button type="submit" class="btn-submit">Guardar</button>
+              <button type="submit" class="btn btn-submit">Guardar</button>
             </form>
           </div>
         </div>
