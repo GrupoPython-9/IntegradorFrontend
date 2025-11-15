@@ -1,5 +1,5 @@
 import { eliminarCategoria, editarCategoria, getCategorias, crearCategoria } from '../../../utils/api';
-
+import { mostrarAlerta } from '../../../utils/alerts';
 import type { ICategoria } from '../../../types/ICategoria';
 
 // 👉 Agrego esta variable global (sirve para saber si estamos editando)
@@ -44,16 +44,19 @@ async function cargarCategorias() {
       if (target.classList.contains('eliminar')) {
         const id = target.getAttribute('data-id');
         if (!id) return;
-
+        
+//Hay que mostrar el alerta para que no se vea el cartel blanco
         if (!confirm('¿Seguro que deseas eliminar esta categoría?')) return;
-
+        
         try {
           const response = await eliminarCategoria(Number(id));
-          alert(response.mensaje || 'Categoría eliminada correctamente');
+          //alert(response.mensaje || 'Categoría eliminada correctamente');
+          mostrarAlerta(response.mensaje || 'Categoría eliminada correctamente');
           cargarCategorias();
         } catch (error) {
           console.error('Error al eliminar categoría:', error);
-          alert('No se pudo eliminar la categoría');
+          //alert('No se pudo eliminar la categoría');
+          mostrarAlerta('No se pudo eliminar la categoría');
         }
       }
 
@@ -140,20 +143,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const imagen = (document.getElementById('imagen') as HTMLInputElement).value.trim();
 
       if (!nombre || !descripcion || !imagen) {
-        alert('Todos los campos son obligatorios');
+        //alert('Todos los campos son obligatorios');
+        mostrarAlerta('Todos los campos son obligatorios')
         return;
       }
 
       try {
   if (categoriaEnEdicion) {
-    // 🟢 Si estamos editando
+
     await editarCategoria(categoriaEnEdicion.id, { nombre, descripcion, imagen });
-    alert('Categoría actualizada correctamente');
+    //alert('Categoría actualizada correctamente');
+    mostrarAlerta('Categoría actualizada correctamente');
     categoriaEnEdicion = null; // limpiamos el estado de edición
   } else {
-    // 🟢 Si estamos creando
     await crearCategoria({ nombre, descripcion, imagen });
-    alert('Categoría creada exitosamente');
+    //alert('Categoría creada exitosamente');
+    mostrarAlerta('Categoría creada exitosamente');
   }
 
   modal.style.display = 'none';
@@ -162,7 +167,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 } catch (error) {
   console.error('Error al guardar categoría:', error);
-  alert('No se pudo guardar la categoría');
+  //alert('No se pudo guardar la categoría');
+  mostrarAlerta('No se pudo guardar la categoría');
 }
 
     });

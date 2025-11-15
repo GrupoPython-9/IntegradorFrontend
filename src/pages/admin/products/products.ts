@@ -7,6 +7,7 @@ import {
   getCategorias,
 } from "../../../utils/api";
 import type { ICategoria } from "../../../types/ICategoria";
+import { mostrarAlerta } from "../../../utils/alerts";
 
 // ───────────────────────────────
 // Elementos del DOM
@@ -23,7 +24,8 @@ let productoEnEdicion: IProduct | null = null;
 // ───────────────────────────────
 // Renderizar productos
 // ───────────────────────────────
-const renderProductos = (productos: IProduct[]) => {
+const renderProductos =(productos: IProduct[]) => {
+  
   productosBody.innerHTML = "";
 
   productos.forEach((p) => {
@@ -36,7 +38,7 @@ const renderProductos = (productos: IProduct[]) => {
       <td>${p.nombre}</td>
       <td>${p.descripcion}</td>
       <td>$${p.precio.toFixed(2)}</td>
-      <td>—</td> <!-- categoría por ahora vacía -->
+      <td>-</td> <!-- categoría por ahora vacía -->
       <td>${p.stock}</td>
       <td>
         <label class="switch">
@@ -65,11 +67,12 @@ const cargarProductos = async () => {
 
     renderProductos(productos);
   } catch (error) {
-    console.error("Error al cargar productos:", error);
+    //console.error("Error al cargar productos:", error);
+    mostrarAlerta(`Error al cargar productos: + ${error}`);
   }
 };
-/*
-// 🔹 Función para cargar categorías en el select
+
+//🔹 Función para cargar categorías en el select
 const cargarCategoriasSelect = async () => {
   try {
     const categorias: ICategoria[] = await getCategorias();
@@ -92,14 +95,16 @@ const cargarCategoriasSelect = async () => {
       select.appendChild(option);
     });
   } catch (error) {
-    console.error("Error al cargar categorías:", error);
+    //console.error("Error al cargar categorías:", error);
+    mostrarAlerta(`Error al cargar categorías: ${error}`);
   }
 };
-*/
+
 // ───────────────────────────────
 // Abrir modal (nuevo o edición)
 // ───────────────────────────────
 const abrirModal = async (producto?: IProduct) => {
+  await cargarCategoriasSelect();
   console.log("Se abrió el modal de producto", producto);
   modalProducto.style.display = "block";
   formProducto.reset();
@@ -146,9 +151,6 @@ window.addEventListener("click", (e) => {
 formProducto.addEventListener("submit", async (e: SubmitEvent) => {
   e.preventDefault();
 
-  const categoriaSelect = document.getElementById("categoria") as HTMLSelectElement;
-  //const categoriaId = parseInt(categoriaSelect.value);
-
   const data = {
     nombre: (document.getElementById("nombreProducto") as HTMLInputElement).value,
     descripcion: (document.getElementById("descripcionProducto") as HTMLInputElement).value,
@@ -161,16 +163,19 @@ formProducto.addEventListener("submit", async (e: SubmitEvent) => {
   try {
     if (productoEnEdicion) {
       await editarProductos(productoEnEdicion.id, data);
-      console.log("Producto actualizado");
+      //console.log("Producto actualizado");
+      mostrarAlerta("Producto actualizado");
     } else {
       await crearProducto(data);
-      console.log("Producto creado");
+      //console.log("Producto creado");
+      mostrarAlerta("Producto creado");
     }
 
     cerrarModalProducto();
     await cargarProductos();
   } catch (error) {
-    console.error("Error al guardar producto:", error);
+    //console.error("Error al guardar producto:", error);
+    mostrarAlerta(`Error al guardar producto: ${error}`)
   }
 });
 
@@ -181,17 +186,20 @@ productosBody.addEventListener("click", async (e: MouseEvent) => {
   const target = e.target as HTMLElement;
   const id = Number(target.dataset.id);
 
-  // 🗑️ Eliminar (soft delete)
+  // Eliminar 
   if (target.classList.contains("btn-delete")) {
+    //
     const confirmDelete = confirm("¿Seguro que deseas eliminar este producto?");
     if (!confirmDelete) return;
 
     try {
         const productoActualizado = await eliminarProducto(id);
-        console.log(productoActualizado); // "Producto eliminado"
+        //console.log(productoActualizado); // "Producto eliminado"
+        mostrarAlerta(`${productoActualizado}`);
         await cargarProductos(); // recarga la tabla    
     } catch (err) {
-      console.error("Error al eliminar producto:", err);
+      //console.error("Error al eliminar producto:", err);
+      mostrarAlerta(`Error al eliminar el producto: ${err}`);
     }
   }
 
@@ -202,7 +210,8 @@ productosBody.addEventListener("click", async (e: MouseEvent) => {
       const producto = productos.find((p) => p.id === id);
       if (producto) abrirModal(producto);
     } catch (err) {
-      console.error("Error al obtener datos del producto:", err);
+      //console.error("Error al obtener datos del producto:", err);
+      mostrarAlerta(`Error al obtener datos del producto: ${err}`);
     }
   }
 });
