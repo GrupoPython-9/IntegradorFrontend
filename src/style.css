@@ -412,6 +412,12 @@ p {
   text-align: left;
 }
 
+#productImage{
+  height: 32vh;
+  width: 32vw;
+  border-radius: 6px;
+}
+
 /*test*/
 
 
@@ -1085,6 +1091,7 @@ PEDIDOS DEL CLIENTE - CSS
     flex-direction: column;
     gap: 20px;
 }
+
 .pedido-card {
     background: #fff;
     border-radius: 10px;
@@ -1219,3 +1226,4 @@ PEDIDOS DEL CLIENTE - CSS
     font-size: 14px;
     color: #775300;
 }
+
