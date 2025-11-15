@@ -1,35 +1,7 @@
-interface Producto {
-  id: number;
-  nombre: string;
-  descripcion?: string;
-  precio: number;
-}
+import  type { DetallePedido } from "../../../types/IDetallePedido.ts";
+import type { Producto } from "../../../types/IProducto";
+import type { Pedido } from "../../../types/IPedido";
 
-interface DetallePedido {
-  id: number;
-  cantidad: number;
-  subtotal: number;
-  producto: Producto;
-}
-
-interface Pedido {
-  id: number;
-  fecha: string;
-  estado: "PENDIENTE"|"CONFIRMADO" | "CANCELADO" | "TERMINADO";
-  total: number;
-  direccionEntrega?: string;
-  telefono?: string;
-  metodoPago?: string;
-  detallePedidos: DetallePedido[];
-  infoEntrega?: InfoEntrega; 
-}
-
-interface InfoEntrega {
-  direccion: string;
-  telefono: string;
-  metodoPago: string;
-  nota?: string;
-}
 
 const modal = document.getElementById("modal-detalle") as HTMLElement;
 const modalBody = document.getElementById("modal-body") as HTMLElement;
@@ -95,7 +67,8 @@ function renderPedidos(pedidos: Pedido[]) {
 
 function abrirModalPedido(pedido: Pedido) {
   const envio = 500;
-  const subtotal = pedido.total - envio;
+  const subtotal = pedido.total;
+  const totalFinal = subtotal + envio;
 
   const productosHtml = pedido.detallePedidos
     .map(
@@ -103,7 +76,7 @@ function abrirModalPedido(pedido: Pedido) {
       <div class="producto-modal">
         <p><strong>${d.producto.nombre}</strong></p>
         <p>Cantidad: ${d.cantidad}</p>
-        <p class="precio-modal">$${d.subtotal.toFixed(2)}</p>
+        <p class="precio-modal">$${totalFinal.toFixed(2)}</p>
       </div>
     `
     )
@@ -116,9 +89,12 @@ function abrirModalPedido(pedido: Pedido) {
     </div>
 
     <h3>📍 Información de Entrega</h3>
-    <p><strong>Dirección:</strong> ${pedido.direccionEntrega || "No informado"}</p>
-    <p><strong>Teléfono:</strong> ${pedido.telefono || "No informado"}</p>
-    <p><strong>Método de pago:</strong> ${pedido.metodoPago || "No informado"}</p>
+    <p><strong>Dirección:</strong> ${pedido.infoEntrega?.direccion || "No informado"}</p>
+    <p><strong>Teléfono:</strong> ${pedido.infoEntrega?.telefono || "No informado"}</p>
+    <p><strong>Método de pago:</strong> ${pedido.infoEntrega?.metodoPago || "No informado"}</p>
+    <p><strong>Nota:</strong> ${pedido.infoEntrega?.nota || "—"}</p>
+
+
 
     <h3>🛒 Productos</h3>
     ${productosHtml}
@@ -127,7 +103,7 @@ function abrirModalPedido(pedido: Pedido) {
       <p>Subtotal: <strong>$${subtotal.toFixed(2)}</strong></p>
       <p>Envío: <strong>$${envio.toFixed(2)}</strong></p>
       <hr>
-      <p class="total-final">Total: <strong>$${pedido.total.toFixed(2)}</strong></p>
+      <p class="total-final">Total: <strong>$${totalFinal.toFixed(2)}</strong></p>
     </div>
 
     <div class="modal-nota">

@@ -40,6 +40,7 @@ function addToCart(producto: IProduct, cantidad: number): void {
 
   if (existing) {
     existing.cantidad += cantidad;
+    existing.stock = producto.stock;
   } else {
     cart.push({
       id: producto.id,
@@ -48,6 +49,7 @@ function addToCart(producto: IProduct, cantidad: number): void {
       descripcion: producto.descripcion,
       imagen: producto.imagen,
       cantidad,
+      stock: producto.stock
     });
   }
 
@@ -67,6 +69,7 @@ async function mostrarProducto() {
   }
 
   const producto = await obtenerProductoPorId(id);
+  console.log("PRODUCTO RECIBIDO DESDE BACKEND 👉", producto);
 
   (document.getElementById("productImage") as HTMLImageElement).src = producto.imagen;
   (document.getElementById("productImage") as HTMLImageElement).alt = producto.nombre;

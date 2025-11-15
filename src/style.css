@@ -1085,6 +1085,7 @@ PEDIDOS DEL CLIENTE - CSS
     flex-direction: column;
     gap: 20px;
 }
+
 .pedido-card {
     background: #fff;
     border-radius: 10px;
@@ -1093,6 +1094,8 @@ PEDIDOS DEL CLIENTE - CSS
     cursor: pointer;
     transition: 0.2s ease;
     border-left: 4px solid #ff8f3a; /* color acento */
+    
+    
 }
 
 .pedido-card:hover {

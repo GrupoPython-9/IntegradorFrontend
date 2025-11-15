@@ -8,7 +8,7 @@ const filtroEstado = document.getElementById("filtro-estado") as HTMLSelectEleme
 
 // Modal
 const modal = document.getElementById("modal-pedido") as HTMLElement;
-const cerrarModal = document.getElementById("cerrar-modal") as HTMLElement;
+const cerrarModal = document.getElementById("cerrarModal") as HTMLElement;
 const tituloPedido = document.getElementById("titulo-pedido") as HTMLElement;
 const detallePedido = document.getElementById("detalle-pedido") as HTMLElement;
 const nuevoEstado = document.getElementById("nuevo-estado") as HTMLSelectElement;
@@ -75,11 +75,27 @@ function abrirModal(pedido: any) {
 
   tituloPedido.textContent = `Detalle del Pedido #ORD-${pedido.id}`;
 
+  // Datos de envío
+  const info = pedido.infoEntrega || {
+    direccion: "No informado",
+    telefono: "No informado",
+    metodoPago: "No informado",
+    nota: "",
+  };
+
   let html = `
     <p><strong>Fecha:</strong> ${new Date(pedido.fecha).toLocaleString("es-AR")}</p>
-    <h3>Productos:</h3>
+
+    <h3>📍 Información de Entrega</h3>
+    <p><strong>Dirección:</strong> ${info.direccion}</p>
+    <p><strong>Teléfono:</strong> ${info.telefono}</p>
+    <p><strong>Método de pago:</strong> ${info.metodoPago}</p>
+    ${info.nota ? `<p><strong>Nota:</strong> ${info.nota}</p>` : ""}
+
+    <h3>🛒 Productos</h3>
   `;
 
+  // Detalles de productos
   pedido.detallePedidos.forEach((d: any) => {
     html += `
       <div class="producto-detalle">
@@ -106,7 +122,7 @@ function abrirModal(pedido: any) {
 
 cerrarModal.addEventListener("click", () => {
   modal.style.display = "none";
-  pedidoSeleccionado = null;
+  //pedidoSeleccionado = null;
 });
 
 // ===============================================================

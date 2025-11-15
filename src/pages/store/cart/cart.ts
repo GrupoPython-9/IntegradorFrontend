@@ -67,7 +67,7 @@ function renderCart() {
         <div class="item-actions">
           <button class="qty-btn" data-action="decrease">-</button>
           <input type="number" min="1" value="${item.cantidad}" class="qty-input" />
-          <button class="qty-btn"" data-action="increase">+</button>
+          <button class="qty-btn" data-action="increase">+</button>
           <span class="item-total">$${(item.cantidad * item.precio).toFixed(2)}</span>
           <button class="delete-item">🗑️</button>
         </div>
@@ -101,6 +101,8 @@ carritoItems.addEventListener("click", (e) => {
 
   const id = Number(itemEl.dataset.id);
   let cart = loadCart();
+  const index = cart.findIndex((p: any) => p.id === id);
+  const itemCarrito = cart[index];
 
   if (target.classList.contains("delete-item")) {
     cart = cart.filter((p: any) => p.id !== id);
@@ -113,13 +115,21 @@ carritoItems.addEventListener("click", (e) => {
     const input = itemEl.querySelector(".qty-input") as HTMLInputElement;
     let cantidad = Number(input.value);
 
-    if (target.dataset.action === "increase") cantidad++;
-    else if (target.dataset.action === "decrease" && cantidad > 1) cantidad--;
+    if (target.dataset.action === "increase") {
+      if (cantidad < itemCarrito.stock) {
+        cantidad++;
+      } else {
+        mostrarAlerta("No queda más stock disponible");
+      return;
+      }
+} else if (target.dataset.action === "decrease" && cantidad > 1) cantidad--;
 
     input.value = cantidad.toString();
 
-    const index = cart.findIndex((p: any) => p.id === id);
-    if (index !== -1) cart[index].cantidad = cantidad;
+    //const index = cart.findIndex((p: any) => p.id === id);
+    itemCarrito.cantidad = cantidad;
+
+    //if (index !== -1) cart[index].cantidad = cantidad;
 
     saveCart(cart);
     renderCart();
@@ -134,11 +144,22 @@ carritoItems.addEventListener("change", (e) => {
   if (!itemEl) return;
 
   const id = Number(itemEl.dataset.id);
-  const nuevaCantidad = Math.max(1, Number(target.value));
+  let nuevaCantidad = Math.max(1, Number(target.value) || 1);
 
   let cart = loadCart();
   const index = cart.findIndex((p: any) => p.id === id);
   if (index !== -1) cart[index].cantidad = nuevaCantidad;
+
+  
+
+  const stock = Number(cart[index].stock ?? 0);
+  if (nuevaCantidad > stock) {
+    mostrarAlerta(`Solo hay ${stock} unidades disponibles`);
+    nuevaCantidad = stock;
+    target.value = String(stock);
+  }
+
+  cart[index].cantidad = nuevaCantidad;
 
   saveCart(cart);
   renderCart();
@@ -190,11 +211,18 @@ form.addEventListener("submit", async (e) => {
   e.stopPropagation();
 
   const cart = loadCart();
-
+/*
   const detallePedidos = cart.map((item: any) => ({
     cantidad: item.cantidad,
     productoId: item.id
   }));
+
+*/
+  const detallePedidos = cart.map((item: any) => ({
+  cantidad: item.cantidad,
+  productoId: item.id
+}));
+
 
   const pedido = {
     estado: "PENDIENTE",
