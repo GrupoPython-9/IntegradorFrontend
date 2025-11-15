@@ -412,6 +412,12 @@ p {
   text-align: left;
 }
 
+#productImage{
+  height: 32vh;
+  width: 32vw;
+  border-radius: 6px;
+}
+
 /*test*/
 
 
@@ -1222,3 +1228,4 @@ PEDIDOS DEL CLIENTE - CSS
     font-size: 14px;
     color: #775300;
 }
+
